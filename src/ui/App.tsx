@@ -17,13 +17,14 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={() => window.electronAPI.clickAction({
+          type: "click:send_count",
+          message: "The count is ",
+          countNumber: count
+        })}>
+          Send Count
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
