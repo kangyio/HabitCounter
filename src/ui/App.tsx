@@ -1,27 +1,24 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { BaseCard } from "../components/BaseCard.tsx";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      <div className="flex min-h-svh items-center justify-center">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <Button onClick={() => window.electronAPI.clickAction({
-          type: "click:send_count",
-          message: "The count is ",
-          countNumber: count
-        })}>
-          Send Count
-        </Button>
-      </div>
-    </>
+    <main className="flex flex-col min-h-svh items-center bg-stone-700 gap-0.5">
+      <BaseCard />
+      <Button onClick={() => setCount((count) => count + 1)}>
+        count is {count}
+      </Button>
+      <Button onClick={() => window.electronAPI.clickAction({
+        type: "click:send_count",
+        message: "The count is ",
+        countNumber: count
+      })}>
+        Send Count
+      </Button>
+    </main>
   );
 }
 
