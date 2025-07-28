@@ -1,29 +1,25 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import { Button } from "@/components/ui/button";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+      <div className="flex min-h-svh items-center justify-center">
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
-        <button onClick={() => window.electronAPI.clickAction({
+        </Button>
+        <Button onClick={() => window.electronAPI.clickAction({
           type: "click:send_count",
           message: "The count is ",
           countNumber: count
         })}>
           Send Count
-        </button>
+        </Button>
       </div>
     </>
   );
