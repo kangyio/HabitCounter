@@ -1,7 +1,6 @@
 type Action = {
   type: "click:send_count";
-  message: "The count is ";
-  countNumber: number;
+  cardInfoArray: CardInfo[];
 };
 
 type CardInfo = {

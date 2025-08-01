@@ -11,7 +11,7 @@ export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTick(tick => tick + 1);
-      //!! Change back to 60000 after testing
+      //Todo Change back to 60000 after testing
     }, 1000); // 60,000 ms = 1 minute
     return () => clearInterval(interval);
   }, []);

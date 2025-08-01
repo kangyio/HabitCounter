@@ -33,8 +33,7 @@ function App() {
           onClick={() =>
             window.electronAPI.clickAction({
               type: "click:send_count",
-              message: "The count is ",
-              countNumber: count
+              cardInfoArray: cards
             })
           }
         >
