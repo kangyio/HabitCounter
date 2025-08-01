@@ -18,8 +18,6 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
   const [hex, setHex] = useState("#F44E3B");
 
   function getCardInfo() {
-    console.log(hex);
-
     return {
       createdAt: Date.now(),
       title: nameInputRef.current?.value || "",
@@ -37,7 +35,6 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
       <DialogContent
         className="sm:max-w-md"
         aria-describedby={undefined}
-        // style={{ backgroundColor: hex, color: "#faf8fc" }}
       >
         <DialogHeader>
           <DialogTitle>Add Counter</DialogTitle>
@@ -53,7 +50,13 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
             />
           </div>
           <div className="grid gap-4">
-            <Label htmlFor="color">Color</Label>
+            <Label
+              htmlFor="color"
+              className="p-3 rounded-xl"
+              style={{ backgroundColor: hex }}
+            >
+              Color
+            </Label>
             <ColorPicker
               hex={hex}
               setHex={setHex}
