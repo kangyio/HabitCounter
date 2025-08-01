@@ -6,12 +6,12 @@ import { displayTimePast } from "@/lib/utils";
 
 export function BaseCard({ createdAt, title, color }: CardInfo) {
   const [countNumber, setCountNumber] = useState(0);
-  const [, setTick] = useState(0); // dummy state to trigger re-render
+  const [, setTick] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTick(tick => tick + 1); // update state every minute
-    }, 1000); // 60,000 ms = 1 minute
+      setTick(tick => tick + 1);
+    }, 60000); // 60,000 ms = 1 minute
     return () => clearInterval(interval);
   }, []);
 
