@@ -7,6 +7,7 @@ type Action = {
 type CardInfo = {
   createdAt: number;
   title: string;
+  color: string;
 };
 
 interface Window {

@@ -4,12 +4,15 @@ import { ProcessCountButton } from "./ProcessCountButton";
 import { CountContext } from "./CountContext";
 import { displayTime } from "@/lib/utils";
 
-export function BaseCard({ createdAt, title }: CardInfo) {
+export function BaseCard({ createdAt, title, color }: CardInfo) {
   const [countNumber, setCountNumber] = useState(0);
 
   return (
     <CountContext.Provider value={{ countNumber, setCountNumber }}>
-      <Card className="w-full max-w-2xs bg-cyan-800 text-slate-50">
+      <Card
+        className="w-full max-w-2xs text-slate-50"
+        style={{ backgroundColor: color }}
+      >
         <CardContent className="flex flex-col justify-center">
           <section className="flex justify-center text-center">
             <ProcessCountButton text="-" />

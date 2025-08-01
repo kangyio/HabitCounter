@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,14 +11,21 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TwitterPicker } from "react-color";
+import { ColorPicker } from "@/components/ColorPicker";
 
-export function AddCardButton({
-  onAddCard
-}: {
-  onAddCard: (inputTitle: string | undefined) => void;
-}) {
+export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) => void }) {
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const [hex, setHex] = useState("#F44E3B");
+
+  function getCardInfo() {
+    console.log(hex);
+
+    return {
+      createdAt: Date.now(),
+      title: nameInputRef.current?.value || "",
+      color: hex
+    };
+  }
 
   return (
     <Dialog>
@@ -30,6 +37,7 @@ export function AddCardButton({
       <DialogContent
         className="sm:max-w-md"
         aria-describedby={undefined}
+        // style={{ backgroundColor: hex, color: "#faf8fc" }}
       >
         <DialogHeader>
           <DialogTitle>Add Counter</DialogTitle>
@@ -46,7 +54,10 @@ export function AddCardButton({
           </div>
           <div className="grid gap-4">
             <Label htmlFor="color">Color</Label>
-            <TwitterPicker />
+            <ColorPicker
+              hex={hex}
+              setHex={setHex}
+            />
           </div>
         </div>
         <DialogFooter>
@@ -54,7 +65,7 @@ export function AddCardButton({
             <Button variant="outline">Cancel</Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button onClick={() => onAddCard(nameInputRef.current?.value)}>Add</Button>
+            <Button onClick={() => onAddCard(getCardInfo())}>Add</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
