@@ -5,8 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function displayTimePast(createdAt: number): string {
-  const timeDiffInMinute = Math.floor((Date.now() - createdAt) / 1000 / 60);
+export function displayTimePast(originalTime: number, countNumber: number): string {
+  const timeDiffInMinute = Math.floor((Date.now() - originalTime) / 1000 / 60);
+
+  if (countNumber === 0) {
+    return "⏱️Never";
+  }
+
+  //TODO Test code below, delete after testing
+  const timeDiffInSecond = Math.floor((Date.now() - originalTime) / 1000);
+  return `⏱️${timeDiffInSecond} seconds ago`;
+  //TODO Test code finish
 
   // less than 1 minute ago
   if (timeDiffInMinute < 1) {

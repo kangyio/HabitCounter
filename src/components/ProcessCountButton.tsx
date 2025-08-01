@@ -1,18 +1,22 @@
 import { useContext } from "react";
 import { CountContext } from "./CountContext";
 
-export function ProcessCountButton(props: { text: "-" | "+"; }) {
+export function ProcessCountButton(props: { text: "-" | "+" }) {
   const context = useContext(CountContext);
   if (!context) throw new Error("CountContext not found");
-  const { countNumber, setCountNumber } = context;
+  const { countNumber, setCountNumber, updatedAt } = context;
 
   function processCountNumber(e: React.MouseEvent<HTMLButtonElement>) {
     if ((e.target as HTMLButtonElement).textContent === "-") {
       if (countNumber <= 0) return;
       setCountNumber(prev => prev - 1);
+      updatedAt.pop();
+      console.log(updatedAt);
     }
     if ((e.target as HTMLButtonElement).textContent === "+") {
       setCountNumber(prev => prev + 1);
+      updatedAt.push(Date.now());
+      console.log(updatedAt);
     }
   }
 

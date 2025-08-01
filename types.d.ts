@@ -6,6 +6,7 @@ type Action = {
 
 type CardInfo = {
   createdAt: number;
+  updatedAt: number[];
   title: string;
   color: string;
 };

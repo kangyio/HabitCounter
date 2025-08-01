@@ -20,6 +20,7 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
   function getCardInfo() {
     return {
       createdAt: Date.now(),
+      updatedAt: [],
       title: nameInputRef.current?.value || "",
       color: hex
     };

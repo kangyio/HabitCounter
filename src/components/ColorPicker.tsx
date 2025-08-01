@@ -29,7 +29,6 @@ export function ColorPicker({ hex, setHex }: ColorPickerProps) {
       color={hex}
       onChange={color => {
         setHex(color.hex);
-        console.log(color.hex);
       }}
     />
   );
