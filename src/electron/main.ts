@@ -19,25 +19,24 @@ app.whenReady().then(() => {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist-react", "index.html"));
   }
 
-  ipcMain.on("clickAction", (_event, action) => {
-    switch (action.type) {
-      case "click:send_count":
-        console.log("count received");
-        writeCardInfoToDB(action.cardInfoArray);
-        break;
-    }
+  ipcMain.on("clickAction", async (_event, action) => {
+    //Todo delete after testing
+    const now = new Date();
+    console.log("count received", `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+    //todo delete after testing
+
+    await writeCardInfoToDB(action.cardInfoArray);
   });
 
-  // async function writeCardInfoToDB(cardInfoArray: CardInfo[]) {
-  //   const dirPath = path.join(app.getAppPath(), "src", "electron", "database");
-  //   const filePath = path.join(dirPath, "cards.json");
-  //   console.log(filePath);
-  //   await fsPromises.mkdir(dirPath, { recursive: true }); // Ensure directory exists
-  //   await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
-  // }
-
   async function writeCardInfoToDB(cardInfoArray: CardInfo[]) {
-    const filePath = path.join(app.getAppPath(), "src", "electron", "database", "cards.json");
-    await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
+    const filePath = path.join(app.getAppPath(), "database", "cards.json");
+
+    try {
+      await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
+      console.log("Cards saved to file");
+    } catch (err) {
+      if (err instanceof Error) console.log(err.message);
+      console.log(String(err));
+    }
   }
 });
