@@ -1,13 +1,10 @@
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { ProcessCountButton } from "./ProcessCountButton";
 import { CountContext } from "./CountContext";
+import { displayTime } from "@/lib/utils";
 
-
-export function BaseCard() {
+export function BaseCard({ createdAt, title }: CardInfo) {
   const [countNumber, setCountNumber] = useState(0);
 
   return (
@@ -17,9 +14,9 @@ export function BaseCard() {
           <section className="flex justify-center text-center">
             <ProcessCountButton text="-" />
             <div className="px-4 py-1 flex-1/2">
-              <p>Code Study</p>
+              <p>{title}</p>
               <p className="text-3xl">{countNumber}</p>
-              <p>10m ago</p>
+              <p>{displayTime(createdAt)}</p>
             </div>
             <ProcessCountButton text="+" />
           </section>

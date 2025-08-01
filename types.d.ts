@@ -4,7 +4,10 @@ type Action = {
   countNumber: number;
 };
 
-
+type CardInfo = {
+  createdAt: number;
+  title: string;
+};
 
 interface Window {
   electronAPI: {
