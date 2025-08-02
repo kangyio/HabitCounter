@@ -27,7 +27,7 @@ export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
             <ProcessCountButton text="-" />
             <div className="flex-1/2 font-bold">
               <p>{title}</p>
-              <p className="text-3xl">{countNumber}</p>
+              <p className="text-3xl">{updatedAt.length}</p>
               <p>{displayTimePast(updatedAt.at(-1) || createdAt, countNumber)}</p>
             </div>
             <ProcessCountButton text="+" />

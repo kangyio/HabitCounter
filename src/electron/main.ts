@@ -29,11 +29,10 @@ app.whenReady().then(() => {
   });
 
   async function writeCardInfoToDB(cardInfoArray: CardInfo[]) {
-    const filePath = path.join(app.getAppPath(), "database", "cards.json");
+    const filePath = path.join(app.getAppPath(), "src", "electron", "cards.json");
 
     try {
       await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
-      console.log("Cards saved to file");
     } catch (err) {
       if (err instanceof Error) console.log(err.message);
       console.log(String(err));
