@@ -19,12 +19,20 @@ app.whenReady().then(() => {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist-react", "index.html"));
   }
 
-  ipcMain.on("clickAction", async (_event, action) => {
-    //Todo delete after testing
-    const now = new Date();
-    console.log("count received", `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
-    //todo delete after testing
+  // Renderer ↔️ Main (two way)
 
+  ipcMain.handle(
+    "cardInfoArray",
+    async () =>
+      await fsPromises.readFile(
+        path.join(app.getAppPath(), "src", "electron", "cards.json"),
+        "utf-8"
+      )
+  );
+
+  // Renderer ➡️ Main
+
+  ipcMain.on("clickAction", async (_event, action) => {
     await writeCardInfoToDB(action.cardInfoArray);
   });
 

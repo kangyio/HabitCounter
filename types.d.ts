@@ -13,5 +13,6 @@ type CardInfo = {
 interface Window {
   electronAPI: {
     clickAction: (action: Action) => void;
+    getCardInfoArray: () => string;
   };
 }

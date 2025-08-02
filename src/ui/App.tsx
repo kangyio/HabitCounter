@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { BaseCard } from "@/components/BaseCard.tsx";
@@ -7,6 +7,10 @@ import { AddCardButton } from "@/components/AddCardButton.tsx";
 function App() {
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState<CardInfo[]>([]);
+
+  useEffect(() => {
+    getCardInfoArray();
+  }, []);
 
   const addCard = (cardInfo: CardInfo) => {
     if (!cardInfo.title) return;
@@ -19,6 +23,11 @@ function App() {
       {...cardInfo}
     />
   ));
+
+  const getCardInfoArray = async () => {
+    const cardInfoArray = await window.electronAPI.getCardInfoArray();
+    setCards(JSON.parse(cardInfoArray));
+  };
 
   return (
     <main className="flex flex-col min-h-svh items-center bg-stone-700 gap-0.5 relative">
@@ -37,7 +46,7 @@ function App() {
             })
           }
         >
-          Send Count
+          Save Card
         </Button>
       </ThemeProvider>
     </main>

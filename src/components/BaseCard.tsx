@@ -11,8 +11,7 @@ export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTick(tick => tick + 1);
-      //Todo Change back to 60000 after testing
-    }, 1000); // 60,000 ms = 1 minute
+    }, 60000); // 60,000 ms = 1 minute
     return () => clearInterval(interval);
   }, []);
 
@@ -28,7 +27,7 @@ export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
             <div className="flex-1/2 font-bold">
               <p>{title}</p>
               <p className="text-3xl">{updatedAt.length}</p>
-              <p>{displayTimePast(updatedAt.at(-1) || createdAt, countNumber)}</p>
+              <p>{displayTimePast(updatedAt.at(-1) || createdAt, updatedAt.length)}</p>
             </div>
             <ProcessCountButton text="+" />
           </section>

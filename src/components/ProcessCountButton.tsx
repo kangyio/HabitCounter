@@ -11,12 +11,10 @@ export function ProcessCountButton(props: { text: "-" | "+" }) {
       if (countNumber <= 0) return;
       setCountNumber(prev => prev - 1);
       updatedAt.pop();
-      console.log(updatedAt);
     }
     if ((e.target as HTMLButtonElement).textContent === "+") {
       setCountNumber(prev => prev + 1);
       updatedAt.push(Date.now());
-      console.log(updatedAt);
     }
   }
 
