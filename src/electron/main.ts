@@ -40,6 +40,7 @@ app.whenReady().then(() => {
     for (const cardInfo of action.cardInfoArray) {
       console.log(`${cardInfo.title}, ${cardInfo.updatedAt.length}`);
     }
+    //TODO END
   });
 
   async function writeCardInfoToDB(cardInfoArray: CardInfo[]) {

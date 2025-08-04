@@ -4,9 +4,11 @@ import { ProcessCountButton } from "./ProcessCountButton";
 import { CountContext } from "./CountContext";
 import { displayTimePast } from "@/lib/utils";
 
-export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
+export function BaseCard({ cards, ...otherProps }: CardInfo & { cards: CardInfo[] }) {
   const [countNumber, setCountNumber] = useState(0);
   const [, setTick] = useState(0);
+
+  const { createdAt, updatedAt, title, color } = otherProps;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,13 +25,19 @@ export function BaseCard({ createdAt, updatedAt, title, color }: CardInfo) {
       >
         <CardContent>
           <section className="flex justify-center text-center">
-            <ProcessCountButton text="-" />
+            <ProcessCountButton
+              text="-"
+              cards={cards}
+            />
             <div className="flex-1/2 font-bold">
               <p>{title}</p>
               <p className="text-3xl">{updatedAt.length}</p>
               <p>{displayTimePast(updatedAt.at(-1) || createdAt, updatedAt.length)}</p>
             </div>
-            <ProcessCountButton text="+" />
+            <ProcessCountButton
+              text="+"
+              cards={cards}
+            />
           </section>
         </CardContent>
       </Card>

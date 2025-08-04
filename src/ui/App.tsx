@@ -24,6 +24,7 @@ function App() {
     <BaseCard
       key={cardInfo.createdAt}
       {...cardInfo}
+      cards={cards}
     />
   ));
 

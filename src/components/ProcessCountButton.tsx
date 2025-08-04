@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { CountContext } from "./CountContext";
+import { electronAPI_clickAction } from "@/lib/utils";
 
-export function ProcessCountButton(props: { text: "-" | "+" }) {
+export function ProcessCountButton(props: { text: "-" | "+" } & { cards: CardInfo[] }) {
   const context = useContext(CountContext);
   if (!context) throw new Error("CountContext not found");
   const { countNumber, setCountNumber, updatedAt } = context;
@@ -23,6 +24,7 @@ export function ProcessCountButton(props: { text: "-" | "+" }) {
       className="flex flex-col justify-center align-middle p-2 rounded-xs text-6xl cursor-pointer transition-transform duration-200 active:scale-95"
       onClick={e => {
         processCountNumber(e);
+        electronAPI_clickAction(props.cards);
       }}
     >
       {props.text}
