@@ -4,13 +4,13 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { AddCardButton } from "@/components/AddCardButton.tsx";
 import { CardGrid } from "@/components/CardGrid";
 
-import { electronAPI_clickAction, getCardInfoArray } from "@/lib/utils";
+import { electronAPI_clickAction, getCardInfoArrayFromDB } from "@/lib/utils";
 
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
 
   useEffect(() => {
-    getCardInfoArray(setCards);
+    getCardInfoArrayFromDB(setCards);
   }, []);
 
   const addCard = (cardInfo: CardInfo) => {
@@ -28,7 +28,10 @@ function App() {
         storageKey="vite-ui-theme"
       >
         <AddCardButton onAddCard={addCard} />
-        <CardGrid cards={cards} />
+        <CardGrid
+          cards={cards}
+          setCards={setCards}
+        />
       </ThemeProvider>
     </main>
   );

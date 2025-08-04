@@ -45,7 +45,9 @@ export function electronAPI_clickAction(cards: CardInfo[]) {
   });
 }
 
-export async function getCardInfoArray(setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>) {
+export async function getCardInfoArrayFromDB(
+  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>
+) {
   const cardInfoArray = await window.electronAPI.getCardInfoArray();
   setCards(JSON.parse(cardInfoArray));
 }
