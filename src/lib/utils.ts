@@ -37,3 +37,10 @@ export function displayTimePast(originalTime: number, updatedAtLength: number): 
     return year === 1 ? "⏱️1 year ago" : `⏱️${year} years ago`;
   }
 }
+
+export function electronAPI_clickAction(cards: CardInfo[]) {
+  window.electronAPI.clickAction({
+    type: "click:send_cardInfo",
+    cardInfoArray: cards
+  });
+}

@@ -3,10 +3,9 @@ import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { BaseCard } from "@/components/BaseCard.tsx";
 import { AddCardButton } from "@/components/AddCardButton.tsx";
-import { electronAPI_clickAction } from "@/electron/util";
+import { electronAPI_clickAction } from "@/lib/utils";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [cards, setCards] = useState<CardInfo[]>([]);
 
   useEffect(() => {
@@ -15,7 +14,10 @@ function App() {
 
   const addCard = (cardInfo: CardInfo) => {
     if (!cardInfo.title) return;
-    setCards([...cards, cardInfo]);
+
+    const newCards = [...cards, cardInfo];
+    setCards(newCards);
+    electronAPI_clickAction(newCards);
   };
 
   const renderedBaseCards = cards.map(cardInfo => (
@@ -38,8 +40,7 @@ function App() {
       >
         <AddCardButton onAddCard={addCard} />
         {renderedBaseCards}
-        <Button onClick={() => setCount(count => count + 1)}>count is {count}</Button>
-        <Button onClick={electronAPI_clickAction(cards)}>Save Card</Button>
+        <Button onClick={() => electronAPI_clickAction(cards)}>Save Card</Button>
       </ThemeProvider>
     </main>
   );

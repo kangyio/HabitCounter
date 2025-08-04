@@ -21,7 +21,9 @@ export function ProcessCountButton(props: { text: "-" | "+" }) {
   return (
     <button
       className="flex flex-col justify-center align-middle p-2 rounded-xs text-6xl cursor-pointer transition-transform duration-200 active:scale-95"
-      onClick={processCountNumber}
+      onClick={e => {
+        processCountNumber(e);
+      }}
     >
       {props.text}
     </button>
