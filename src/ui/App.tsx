@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { BaseCard } from "@/components/BaseCard.tsx";
 import { AddCardButton } from "@/components/AddCardButton.tsx";
+import { electronAPI_clickAction } from "@/electron/util";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -38,16 +39,7 @@ function App() {
         <AddCardButton onAddCard={addCard} />
         {renderedBaseCards}
         <Button onClick={() => setCount(count => count + 1)}>count is {count}</Button>
-        <Button
-          onClick={() =>
-            window.electronAPI.clickAction({
-              type: "click:send_count",
-              cardInfoArray: cards
-            })
-          }
-        >
-          Save Card
-        </Button>
+        <Button onClick={electronAPI_clickAction(cards)}>Save Card</Button>
       </ThemeProvider>
     </main>
   );

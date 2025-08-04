@@ -1,5 +1,5 @@
 type Action = {
-  type: "click:send_count";
+  type: "click:send_cardInfo";
   cardInfoArray: CardInfo[];
 };
 

@@ -34,6 +34,12 @@ app.whenReady().then(() => {
 
   ipcMain.on("clickAction", async (_event, action) => {
     await writeCardInfoToDB(action.cardInfoArray);
+
+    //TODO For debugging only, delete later
+    console.log("CardInfo Received:");
+    for (const cardInfo of action.cardInfoArray) {
+      console.log(`${cardInfo.title}, ${cardInfo.updatedAt.length}`);
+    }
   });
 
   async function writeCardInfoToDB(cardInfoArray: CardInfo[]) {
