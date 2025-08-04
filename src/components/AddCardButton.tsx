@@ -46,7 +46,7 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
             <Input
               id="name"
               name="name"
-              defaultValue="Your New Counter"
+              placeholder="Enter a title"
               ref={nameInputRef}
             />
           </div>
