@@ -34,7 +34,7 @@ export function AddCardButton({ onAddCard }: { onAddCard: (cardInfo: CardInfo) =
         </button>
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-md"
+        className="max-w-[334px]"
         aria-describedby={undefined}
       >
         <DialogHeader>

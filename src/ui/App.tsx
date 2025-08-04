@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { BaseCard } from "@/components/BaseCard.tsx";
 import { AddCardButton } from "@/components/AddCardButton.tsx";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger
+} from "@/components/ui/context-menu";
+
 import { electronAPI_clickAction } from "@/lib/utils";
 
 function App() {
@@ -40,7 +48,17 @@ function App() {
         storageKey="vite-ui-theme"
       >
         <AddCardButton onAddCard={addCard} />
-        {renderedBaseCards}
+        <ContextMenu>
+          <ContextMenuTrigger>
+            <div className="flex flex-col gap-1">{renderedBaseCards}</div>
+          </ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuItem>Profile</ContextMenuItem>
+            <ContextMenuItem>Billing</ContextMenuItem>
+            <ContextMenuItem>Team</ContextMenuItem>
+            <ContextMenuItem>Subscription</ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
         <Button onClick={() => electronAPI_clickAction(cards)}>Save Card</Button>
       </ThemeProvider>
     </main>

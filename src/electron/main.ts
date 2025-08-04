@@ -6,7 +6,7 @@ import { getPreloadPath } from "./pathResolver.js";
 
 app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 800,
     webPreferences: {
       preload: getPreloadPath()
     }

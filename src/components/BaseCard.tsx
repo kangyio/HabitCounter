@@ -17,10 +17,17 @@ export function BaseCard({ cards, ...otherProps }: CardInfo & { cards: CardInfo[
     return () => clearInterval(interval);
   }, []);
 
+  function displayTitle() {
+    if (title.length > 20) {
+      return title.slice(0, 20) + "...";
+    }
+    return title;
+  }
+
   return (
     <CountContext.Provider value={{ countNumber, setCountNumber, updatedAt }}>
       <Card
-        className="w-full max-w-2xs"
+        className="w-[276px]"
         style={{ backgroundColor: color }}
       >
         <CardContent>
@@ -30,7 +37,7 @@ export function BaseCard({ cards, ...otherProps }: CardInfo & { cards: CardInfo[
               cards={cards}
             />
             <div className="flex-1/2 font-bold">
-              <p>{title}</p>
+              <p className="text-nowrap">{displayTitle()}</p>
               <p className="text-3xl">{updatedAt.length}</p>
               <p>{displayTimePast(updatedAt.at(-1) || createdAt, updatedAt.length)}</p>
             </div>
