@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/context-menu";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { CardDialogContent } from "./CardDialogContent";
+import { TimerIcon } from "lucide-react";
 
 export function BaseCard({
   cards,
@@ -47,12 +48,13 @@ export function BaseCard({
                   text="-"
                   cards={cards}
                 />
-                <div className="flex-1/2 font-bold">
-                  <p className="text-nowrap">{displayTitle()}</p>
-                  <p className="text-3xl">{updatedAt.length}</p>
-                  <p className="text-nowrap">
+                <div className="flex-1/2 font-bold ">
+                  <div className="text-nowrap">{displayTitle()}</div>
+                  <div className="text-3xl">{updatedAt.length}</div>
+                  <div className="text-nowrap flex place-content-center items-center gap-0.5">
+                    <TimerIcon size={18} />
                     {displayTimePast(updatedAt.at(-1) || createdAt, updatedAt.length)}
-                  </p>
+                  </div>
                 </div>
                 <ProcessCountButton
                   text="+"
