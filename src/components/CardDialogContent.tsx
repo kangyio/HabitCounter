@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/ColorPicker";
+import { AlertForNoTitle } from "@/components/AlertForNoTitle";
 
 export function CardDialogContent({
   dialogTrigger,
@@ -27,6 +28,7 @@ export function CardDialogContent({
 }) {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const [hex, setHex] = useState("#F44E3B");
+  const [isTitleValid, setIsTitleValid] = useState(true);
 
   function getCardInfo(): CardInfo {
     return {
@@ -37,7 +39,14 @@ export function CardDialogContent({
     };
   }
 
-  function handleConfirmButtonClick() {
+  function handleConfirmButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (!nameInputRef.current?.value) {
+      e.preventDefault();
+      setIsTitleValid(false);
+      return;
+    }
+
+    setIsTitleValid(true);
     if (dialogTitle === "Add Counter") {
       return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
     } else if (dialogTitle === "Edit") {
@@ -69,6 +78,7 @@ export function CardDialogContent({
               ref={nameInputRef}
             />
           </div>
+          {isTitleValid ? null : <AlertForNoTitle />}
           <div className="grid gap-4">
             <Label
               htmlFor="color"
@@ -95,7 +105,7 @@ export function CardDialogContent({
           <DialogClose asChild>
             <Button
               name="confirm"
-              onClick={handleConfirmButtonClick}
+              onClick={e => handleConfirmButtonClick(e)}
             >
               {confirmButtonText}
             </Button>
