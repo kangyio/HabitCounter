@@ -52,7 +52,7 @@ export function CardDialogContent({
     <Dialog>
       {dialogTrigger}
       <DialogContent
-        className="max-w-[334px]"
+        className="w-[334px] min-w-[334px]"
         aria-describedby={undefined}
       >
         <DialogHeader>
