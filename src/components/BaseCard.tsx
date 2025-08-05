@@ -69,7 +69,12 @@ export function BaseCard({
         <DialogTrigger asChild>
           <ContextMenuItem>Edit</ContextMenuItem>
         </DialogTrigger>
-        <ContextMenuItem onClick={() => deleteCard()}>Delete</ContextMenuItem>
+        <ContextMenuItem
+          variant="destructive"
+          onClick={() => deleteCard()}
+        >
+          Delete
+        </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );
