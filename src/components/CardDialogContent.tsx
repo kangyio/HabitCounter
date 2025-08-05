@@ -11,39 +11,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/ColorPicker";
-import { electronAPI_clickAction } from "@/lib/utils";
 
 export function CardDialogContent({
   dialogTrigger,
   dialogTitle,
+  originalCardTitle,
   confirmButtonText,
-  cards,
-  setCards
+  confirmButtonFunction
 }: {
   dialogTrigger: JSX.Element;
-  dialogTitle: string;
+  dialogTitle: DialogTitle;
+  originalCardTitle: string;
   confirmButtonText: string;
-  cards: CardInfo[];
-  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  confirmButtonFunction: DialogConfirmButtonFunction;
 }) {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const [hex, setHex] = useState("#F44E3B");
 
-  const addCard = (cardInfo: CardInfo) => {
-    if (!cardInfo.title) return;
-
-    const newCards = [...cards, cardInfo];
-    setCards(newCards);
-    electronAPI_clickAction(newCards);
-  };
-
-  function getCardInfo() {
+  function getCardInfo(): CardInfo {
     return {
       createdAt: Date.now(),
       updatedAt: [],
       title: nameInputRef.current?.value || "",
       color: hex
     };
+  }
+
+  function handleConfirmButtonClick() {
+    if (dialogTitle === "Add Counter") {
+      return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
+    } else if (dialogTitle === "Edit") {
+      return (confirmButtonFunction as (inputValue: string | undefined) => void)(
+        nameInputRef.current?.value
+      );
+    }
   }
 
   return (
@@ -63,6 +64,7 @@ export function CardDialogContent({
               id="name"
               name="name"
               placeholder="Enter a title"
+              defaultValue={originalCardTitle}
               ref={nameInputRef}
             />
           </div>
@@ -82,10 +84,20 @@ export function CardDialogContent({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button
+              name="cancel"
+              variant="outline"
+            >
+              Cancel
+            </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button onClick={() => addCard(getCardInfo())}>{confirmButtonText}</Button>
+            <Button
+              name="confirm"
+              onClick={handleConfirmButtonClick}
+            >
+              {confirmButtonText}
+            </Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

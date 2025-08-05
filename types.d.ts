@@ -10,6 +10,12 @@ type CardInfo = {
   color: string;
 };
 
+type DialogConfirmButtonFunction =
+  | ((cardInfo: CardInfo) => void)
+  | ((inputValue: string | undefined) => void);
+
+type DialogTitle = "Add Counter" | "Edit";
+
 interface Window {
   electronAPI: {
     clickAction: (action: Action) => void;

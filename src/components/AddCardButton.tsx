@@ -1,3 +1,4 @@
+import { electronAPI_clickAction } from "@/lib/utils";
 import { CardDialogContent } from "./CardDialogContent";
 import { DialogTrigger } from "@/components/ui/dialog";
 
@@ -16,13 +17,21 @@ export function AddCardButton({
     </DialogTrigger>
   );
 
+  function addCard(cardInfo: CardInfo) {
+    if (!cardInfo.title) return;
+
+    const newCards = [...cards, cardInfo];
+    setCards(newCards);
+    electronAPI_clickAction(newCards);
+  }
+
   return (
     <CardDialogContent
       dialogTrigger={dialogTrigger}
       dialogTitle="Add Counter"
+      originalCardTitle=""
       confirmButtonText="Add"
-      cards={cards}
-      setCards={setCards}
+      confirmButtonFunction={addCard}
     />
   );
 }
