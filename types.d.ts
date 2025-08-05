@@ -12,7 +12,7 @@ type CardInfo = {
 
 type DialogConfirmButtonFunction =
   | ((cardInfo: CardInfo) => void)
-  | ((inputValue: string | undefined) => void);
+  | ((inputValue: string | undefined, inputHex: string) => void);
 
 type DialogTitle = "Add Counter" | "Edit";
 

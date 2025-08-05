@@ -41,8 +41,9 @@ export function CardDialogContent({
     if (dialogTitle === "Add Counter") {
       return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
     } else if (dialogTitle === "Edit") {
-      return (confirmButtonFunction as (inputValue: string | undefined) => void)(
-        nameInputRef.current?.value
+      return (confirmButtonFunction as (inputValue: string | undefined, inputHex: string) => void)(
+        nameInputRef.current?.value,
+        hex
       );
     }
   }

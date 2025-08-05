@@ -86,13 +86,15 @@ export function BaseCard({
     electronAPI_clickAction(cardsAfterDelete);
   }
 
-  function editCard(inputValue: string | undefined) {
+  function editCard(inputValue: string | undefined, inputHex: string) {
     const targetCard = cards.find(cardInfo => cardInfo.createdAt === createdAt);
     if (!targetCard) return;
     if (!inputValue) return;
     setCards(
       cards.map(cardInfo =>
-        cardInfo.createdAt === createdAt ? { ...cardInfo, title: inputValue } : cardInfo
+        cardInfo.createdAt === createdAt
+          ? { ...cardInfo, title: inputValue, color: inputHex }
+          : cardInfo
       )
     );
     electronAPI_clickAction(cards);
