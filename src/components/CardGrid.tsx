@@ -12,7 +12,7 @@ export function CardGrid({
       key={cardInfo.createdAt}
       cards={cards}
       setCards={setCards}
-      {...cardInfo}
+      currentCardInfo={cardInfo}
     />
   ));
 

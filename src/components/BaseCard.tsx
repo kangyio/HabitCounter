@@ -25,13 +25,17 @@ import { Label } from "@/components/ui/label";
 export function BaseCard({
   cards,
   setCards,
-  ...otherProps
-}: CardInfo & { cards: CardInfo[]; setCards: React.Dispatch<React.SetStateAction<CardInfo[]>> }) {
+  currentCardInfo
+}: {
+  cards: CardInfo[];
+  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  currentCardInfo: CardInfo;
+}) {
   const [countNumber, setCountNumber] = useState(0);
   const [, setTick] = useState(0);
   const editTitleInputRef = useRef<HTMLInputElement>(null);
 
-  const { createdAt, updatedAt, title, color } = otherProps;
+  const { createdAt, updatedAt, title, color } = currentCardInfo;
 
   useEffect(() => {
     const interval = setInterval(() => {
