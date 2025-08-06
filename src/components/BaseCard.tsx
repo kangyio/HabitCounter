@@ -97,8 +97,9 @@ export function BaseCard({
   }
 
   function editCard(inputValue: string | undefined, inputHex: string) {
-    const targetCard = cards.find(cardInfo => cardInfo.createdAt === createdAt);
-    if (!targetCard) return;
+    const targetCardIndex = cards.findIndex(cardInfo => cardInfo.createdAt === createdAt);
+
+    if (!targetCardIndex) return;
     if (!inputValue) return;
 
     const newCards = cards.map(cardInfo =>
@@ -106,7 +107,9 @@ export function BaseCard({
         ? { ...cardInfo, title: inputValue, color: inputHex }
         : cardInfo
     );
+
     setCards(newCards);
+    setCurrentCardInfo(newCards[targetCardIndex]);
     electronAPI_clickAction(newCards);
   }
 

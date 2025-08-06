@@ -70,8 +70,8 @@ export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInf
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="text-xl">{currentCardInfo?.title} Chart</CardTitle>
+        <CardDescription>{`January - December ${dayjs().year()}`}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
