@@ -127,9 +127,7 @@ export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInf
         <div className="flex gap-2 leading-none font-medium">
           Current Year Total: {currentYearCount}
         </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total counts for the 12 months
-        </div>
+        <div className="text-muted-foreground leading-none">Showing total counts for 12 months</div>
       </CardFooter>
     </Card>
   );

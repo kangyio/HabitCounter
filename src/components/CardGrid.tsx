@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BaseCard } from "@/components/BaseCard.tsx";
-import { BaseCardBarChart } from "@/components/BaseCardBarChart";
+import { BottomDrawer } from "@/components/BottomDrawer";
 
 export function CardGrid({
   cards,
@@ -10,6 +10,7 @@ export function CardGrid({
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
 }) {
   const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const renderedBaseCards = cards.map(cardInfo => (
     <BaseCard
@@ -18,13 +19,18 @@ export function CardGrid({
       setCards={setCards}
       currentCardInfo={cardInfo}
       setCurrentCardInfo={setCurrentCardInfo}
+      setIsDrawerOpen={setIsDrawerOpen}
     />
   ));
 
   return (
     <div className="flex flex-col gap-1">
       {renderedBaseCards}
-      <BaseCardBarChart currentCardInfo={currentCardInfo} />
+      <BottomDrawer
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        currentCardInfo={currentCardInfo}
+      />
     </div>
   );
 }

@@ -17,12 +17,14 @@ export function BaseCard({
   cards,
   setCards,
   currentCardInfo,
-  setCurrentCardInfo
+  setCurrentCardInfo,
+  setIsDrawerOpen
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   currentCardInfo: CardInfo;
   setCurrentCardInfo: React.Dispatch<React.SetStateAction<CardInfo | undefined>>;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [countNumber, setCountNumber] = useState(0);
   const [, setTick] = useState(0);
@@ -43,7 +45,7 @@ export function BaseCard({
           value={{ countNumber, setCountNumber, currentCardInfo, setCurrentCardInfo }}
         >
           <Card
-            className="w-[276px]"
+            className="w-[276px] cursor-pointer"
             style={{ backgroundColor: color }}
             onClick={handleCardClick}
           >
@@ -118,6 +120,7 @@ export function BaseCard({
   function handleCardClick(e: React.MouseEvent<HTMLElement>) {
     if (e.target instanceof HTMLButtonElement) return;
     setCurrentCardInfo(currentCardInfo);
+    setIsDrawerOpen(true);
   }
 
   return (
