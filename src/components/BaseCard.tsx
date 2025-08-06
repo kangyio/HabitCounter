@@ -12,15 +12,18 @@ import {
 import { DialogTrigger } from "@/components/ui/dialog";
 import { CardDialogContent } from "./CardDialogContent";
 import { TimerIcon } from "lucide-react";
+import dayjs from "dayjs";
 
 export function BaseCard({
   cards,
   setCards,
-  currentCardInfo
+  currentCardInfo,
+  setBarChartData
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   currentCardInfo: CardInfo;
+  setBarChartData: React.Dispatch<React.SetStateAction<BarChartData[]>>;
 }) {
   const [countNumber, setCountNumber] = useState(0);
   const [, setTick] = useState(0);
@@ -41,14 +44,15 @@ export function BaseCard({
           <Card
             className="w-[276px]"
             style={{ backgroundColor: color }}
+            onClick={handleCardClick}
           >
             <CardContent>
-              <section className="flex justify-center text-center">
+              <section className="flex justify-center text-center gap-1">
                 <ProcessCountButton
                   text="-"
                   cards={cards}
                 />
-                <div className="flex-1/2 font-bold ">
+                <div className="flex-1/2 font-bold">
                   <div className="text-nowrap">{displayTitle()}</div>
                   <div className="text-3xl">{updatedAt.length}</div>
                   <div className="text-nowrap flex place-content-center items-center gap-0.5">
@@ -97,14 +101,48 @@ export function BaseCard({
     const targetCard = cards.find(cardInfo => cardInfo.createdAt === createdAt);
     if (!targetCard) return;
     if (!inputValue) return;
-    setCards(
-      cards.map(cardInfo =>
-        cardInfo.createdAt === createdAt
-          ? { ...cardInfo, title: inputValue, color: inputHex }
-          : cardInfo
-      )
+
+    const newCards = cards.map(cardInfo =>
+      cardInfo.createdAt === createdAt
+        ? { ...cardInfo, title: inputValue, color: inputHex }
+        : cardInfo
     );
-    electronAPI_clickAction(cards);
+    setCards(newCards);
+    electronAPI_clickAction(newCards);
+  }
+
+  function handleCardClick(e: React.MouseEvent<HTMLElement>) {
+    if (e.target instanceof HTMLButtonElement) return;
+    setBarChartData(generateBarChartData());
+  }
+
+  function generateBarChartData(): BarChartData[] {
+    const MONTHS: Month[] = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ] as const;
+
+    const chartDataInMonth = MONTHS.map(month => ({
+      month,
+      count: 0
+    }));
+
+    for (let i = 0; i < updatedAt.length; i++) {
+      const month = dayjs(updatedAt[i]).month();
+      chartDataInMonth[month].count++;
+    }
+
+    return chartDataInMonth;
   }
 
   return (

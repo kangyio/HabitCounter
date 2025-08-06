@@ -38,7 +38,7 @@ app.whenReady().then(() => {
     //TODO For debugging only, delete later
     console.log("CardInfo Received:");
     for (const cardInfo of action.cardInfoArray) {
-      console.log(`${cardInfo.title}, ${cardInfo.updatedAt.length}`);
+      console.log(`${cardInfo.title}, ${cardInfo.updatedAt.length}, ${cardInfo.color}`);
     }
     //TODO END
   });

@@ -16,6 +16,25 @@ type DialogConfirmButtonFunction =
 
 type DialogTitle = "Add Counter" | "Edit";
 
+type BarChartData = {
+  month: Month;
+  count: number;
+};
+
+type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
 interface Window {
   electronAPI: {
     clickAction: (action: Action) => void;
