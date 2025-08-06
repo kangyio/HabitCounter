@@ -86,7 +86,7 @@ export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInf
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          className="min-h-[240px]"
+          className="min-h-[360px]"
         >
           <BarChart
             accessibilityLayer

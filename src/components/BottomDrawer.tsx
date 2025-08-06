@@ -24,7 +24,7 @@ export function BottomDrawer({
       open={isDrawerOpen}
       onOpenChange={setIsDrawerOpen}
     >
-      <DrawerContent className="focus:outline-none focus:ring-0">
+      <DrawerContent className="focus:outline-none focus:ring-0 flex justify-center items-center">
         <DrawerHeader>
           <DrawerTitle></DrawerTitle>
           <DrawerDescription></DrawerDescription>
