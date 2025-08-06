@@ -12,18 +12,17 @@ import {
 import { DialogTrigger } from "@/components/ui/dialog";
 import { CardDialogContent } from "./CardDialogContent";
 import { TimerIcon } from "lucide-react";
-import dayjs from "dayjs";
 
 export function BaseCard({
   cards,
   setCards,
   currentCardInfo,
-  setBarChartData
+  setCurrentCardInfo
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   currentCardInfo: CardInfo;
-  setBarChartData: React.Dispatch<React.SetStateAction<BarChartData[]>>;
+  setCurrentCardInfo: React.Dispatch<React.SetStateAction<CardInfo | undefined>>;
 }) {
   const [countNumber, setCountNumber] = useState(0);
   const [, setTick] = useState(0);
@@ -113,36 +112,7 @@ export function BaseCard({
 
   function handleCardClick(e: React.MouseEvent<HTMLElement>) {
     if (e.target instanceof HTMLButtonElement) return;
-    setBarChartData(generateBarChartData());
-  }
-
-  function generateBarChartData(): BarChartData[] {
-    const MONTHS: Month[] = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ] as const;
-
-    const chartDataInMonth = MONTHS.map(month => ({
-      month,
-      count: 0
-    }));
-
-    for (let i = 0; i < updatedAt.length; i++) {
-      const month = dayjs(updatedAt[i]).month();
-      chartDataInMonth[month].count++;
-    }
-
-    return chartDataInMonth;
+    setCurrentCardInfo(currentCardInfo);
   }
 
   return (

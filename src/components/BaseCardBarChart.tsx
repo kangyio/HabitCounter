@@ -2,6 +2,8 @@
 
 import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 
 import {
   Card,
@@ -27,7 +29,44 @@ const chartConfig = {
   }
 } satisfies ChartConfig;
 
-export function BaseCardBarChart({ barChartData }: { barChartData: BarChartData[] }) {
+export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInfo | undefined }) {
+  const [barChartData, setBarChartData] = useState<BarChartData[]>([]);
+
+  useEffect(() => {
+    if (!currentCardInfo) return;
+    const updatedAt = currentCardInfo.updatedAt;
+    setBarChartData(generateBarChartData(updatedAt));
+  }, [currentCardInfo]);
+
+  function generateBarChartData(updateHistory: number[]): BarChartData[] {
+    const MONTHS: Month[] = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ] as const;
+
+    const chartDataInMonth = MONTHS.map(month => ({
+      month,
+      count: 0
+    }));
+
+    for (let i = 0; i < updateHistory.length; i++) {
+      const month = dayjs(updateHistory[i]).month();
+      chartDataInMonth[month].count++;
+    }
+
+    return chartDataInMonth;
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -60,7 +99,7 @@ export function BaseCardBarChart({ barChartData }: { barChartData: BarChartData[
             />
             <Bar
               dataKey="count"
-              fill="var(--color-count)"
+              fill={currentCardInfo?.color || "var(--color-count)"}
               radius={8}
               minPointSize={5}
             >
