@@ -39,7 +39,9 @@ export function BaseCard({
   const dialogTrigger = (
     <ContextMenu>
       <ContextMenuTrigger>
-        <CountContext.Provider value={{ countNumber, setCountNumber, updatedAt }}>
+        <CountContext.Provider
+          value={{ countNumber, setCountNumber, currentCardInfo, setCurrentCardInfo }}
+        >
           <Card
             className="w-[276px]"
             style={{ backgroundColor: color }}

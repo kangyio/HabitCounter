@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -31,14 +30,19 @@ const chartConfig = {
 
 export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInfo | undefined }) {
   const [barChartData, setBarChartData] = useState<BarChartData[]>([]);
+  const [currentYearCount, setCurrentYearCount] = useState(0);
 
   useEffect(() => {
     if (!currentCardInfo) return;
-    const updatedAt = currentCardInfo.updatedAt;
-    setBarChartData(generateBarChartData(updatedAt));
+    const { barChartData, currentYearCount } = generateBarChartData(currentCardInfo.updatedAt);
+    setBarChartData(barChartData);
+    setCurrentYearCount(currentYearCount);
   }, [currentCardInfo]);
 
-  function generateBarChartData(updateHistory: number[]): BarChartData[] {
+  function generateBarChartData(updateHistory: number[]): {
+    barChartData: BarChartData[];
+    currentYearCount: number;
+  } {
     const MONTHS: Month[] = [
       "January",
       "February",
@@ -59,12 +63,18 @@ export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInf
       count: 0
     }));
 
+    let currentYearCount = 0;
+
     for (let i = 0; i < updateHistory.length; i++) {
+      // For BarChartData used for displaying the bar chart
       const month = dayjs(updateHistory[i]).month();
       chartDataInMonth[month].count++;
+
+      // For CardFooter used for displaying the chart footer
+      if (dayjs(updateHistory[i]).year() === dayjs().year()) currentYearCount++;
     }
 
-    return chartDataInMonth;
+    return { barChartData: chartDataInMonth, currentYearCount: currentYearCount };
   }
 
   return (
@@ -115,10 +125,10 @@ export function BaseCardBarChart({ currentCardInfo }: { currentCardInfo: CardInf
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Current Year Total: {currentYearCount}
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing total counts for the 12 months
         </div>
       </CardFooter>
     </Card>

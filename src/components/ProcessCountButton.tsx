@@ -5,17 +5,19 @@ import { electronAPI_clickAction } from "@/lib/utils";
 export function ProcessCountButton(props: { text: "-" | "+" } & { cards: CardInfo[] }) {
   const context = useContext(CountContext);
   if (!context) throw new Error("CountContext not found");
-  const { countNumber, setCountNumber, updatedAt } = context;
+  const { countNumber, setCountNumber, currentCardInfo, setCurrentCardInfo } = context;
 
   function processCountNumber(e: React.MouseEvent<HTMLButtonElement>) {
     if ((e.target as HTMLButtonElement).textContent === "-") {
       if (countNumber <= 0) return;
       setCountNumber(prev => prev - 1);
-      updatedAt.pop();
+      currentCardInfo.updatedAt.pop();
+      setCurrentCardInfo({ ...currentCardInfo, updatedAt: currentCardInfo.updatedAt });
     }
     if ((e.target as HTMLButtonElement).textContent === "+") {
       setCountNumber(prev => prev + 1);
-      updatedAt.push(Date.now());
+      currentCardInfo.updatedAt.push(Date.now());
+      setCurrentCardInfo({ ...currentCardInfo, updatedAt: currentCardInfo.updatedAt });
     }
   }
 
