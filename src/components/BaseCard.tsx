@@ -47,7 +47,7 @@ export function BaseCard({
           <Card
             className="w-[276px] cursor-pointer"
             style={{ backgroundColor: color }}
-            onClick={handleCardClick}
+            onMouseDown={handleCardMouseDown}
           >
             <CardContent>
               <section className="flex justify-center text-center gap-1">
@@ -117,10 +117,31 @@ export function BaseCard({
     electronAPI_clickAction(newCards);
   }
 
-  function handleCardClick(e: React.MouseEvent<HTMLElement>) {
+  function handleCardMouseDown(e: React.MouseEvent<HTMLElement>) {
     if (e.target instanceof HTMLButtonElement) return;
-    setCurrentCardInfo(currentCardInfo);
-    setIsDrawerOpen(true);
+    let isHoldingMouse = false;
+
+    e.target.addEventListener("mouseup", handleCardMouseUp);
+    e.target.addEventListener("mouseleave", clearEventListenersAndTimer);
+
+    const timer = setTimeout(() => {
+      isHoldingMouse = true;
+    }, 500);
+
+    function handleCardMouseUp() {
+      clearEventListenersAndTimer();
+
+      if (!isHoldingMouse) {
+        setCurrentCardInfo(currentCardInfo);
+        setIsDrawerOpen(true);
+      }
+    }
+
+    function clearEventListenersAndTimer() {
+      e.target.removeEventListener("mouseup", handleCardMouseUp);
+      e.target.removeEventListener("mouseleave", handleCardMouseUp);
+      clearTimeout(timer);
+    }
   }
 
   return (
