@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/context-menu";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { CardDialogContent } from "./CardDialogContent";
-import { TimerIcon } from "lucide-react";
+import { TimerIcon, MoveIcon } from "lucide-react";
 
 export function BaseCard({
   cards,
@@ -67,6 +67,12 @@ export function BaseCard({
                   text="+"
                   cards={cards}
                 />
+                <div className="fixed">
+                  <MoveIcon
+                    className="move_icon absolute right-[-130px] top-[-15px]"
+                    size={20}
+                  />
+                </div>
               </section>
             </CardContent>
           </Card>
@@ -128,7 +134,7 @@ export function BaseCard({
 
     const timer = setTimeout(() => {
       isHoldingMouse = true;
-    }, 100);
+    }, 500);
 
     function handleCardMouseUp() {
       clearEventListenersAndTimer();

@@ -25,7 +25,7 @@ export function CardGrid({
       // Build layout
       cardsLayoutArray.push({
         i: String(cardInfo.createdAt),
-        x: 0,
+        x: 1,
         y: i,
         w: 1,
         h: 1
@@ -55,10 +55,10 @@ export function CardGrid({
         className="layout"
         layout={cardsLayoutArray}
         cols={3}
+        width={window.innerWidth}
         rowHeight={134}
-        width={860}
         isResizable={false}
-        draggableCancel=".process_count_button"
+        draggableHandle=".move_icon"
       >
         {renderedBaseCards}
       </GridLayout>
