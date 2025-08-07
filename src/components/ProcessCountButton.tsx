@@ -23,7 +23,7 @@ export function ProcessCountButton(props: { text: "-" | "+" } & { cards: CardInf
 
   return (
     <button
-      className="flex flex-col justify-center align-middle p-2 rounded-xs text-6xl cursor-pointer transition-transform duration-200 active:scale-95"
+      className="process_count_button flex flex-col justify-center align-middle p-2 text-6xl cursor-pointer transition-transform duration-200 active:scale-95"
       onClick={e => {
         processCountNumber(e);
         electronAPI_clickAction(props.cards);

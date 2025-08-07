@@ -11,7 +11,7 @@ export function AddCardButton({
 }) {
   const dialogTrigger = (
     <DialogTrigger asChild>
-      <button className="bg-slate-100 p-3 rounded-xl text-2xl fixed top-4 right-4 cursor-pointer transition-transform duration-200 active:scale-95">
+      <button className="bg-slate-100 p-3 rounded-xl text-2xl fixed top-4 right-4 cursor-pointer transition-transform duration-200 active:scale-95 z-50">
         ➕
       </button>
     </DialogTrigger>
@@ -29,7 +29,7 @@ export function AddCardButton({
     <CardDialogContent
       dialogTrigger={dialogTrigger}
       dialogTitle="Add Counter"
-      originalCardTitle=""
+      originalCardInfo={undefined}
       confirmButtonText="Add"
       confirmButtonFunction={addCard}
     />

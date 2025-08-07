@@ -103,7 +103,7 @@ export function BaseCard({
   function editCard(inputValue: string | undefined, inputHex: string) {
     const targetCardIndex = cards.findIndex(cardInfo => cardInfo.createdAt === createdAt);
 
-    if (!targetCardIndex) return;
+    if (targetCardIndex === -1) return;
     if (!inputValue) return;
 
     const newCards = cards.map(cardInfo =>
@@ -119,14 +119,16 @@ export function BaseCard({
 
   function handleCardMouseDown(e: React.MouseEvent<HTMLElement>) {
     if (e.target instanceof HTMLButtonElement) return;
+    e.preventDefault();
     let isHoldingMouse = false;
 
+    e.target.addEventListener("mousemove", handleCardMouseMove);
     e.target.addEventListener("mouseup", handleCardMouseUp);
     e.target.addEventListener("mouseleave", clearEventListenersAndTimer);
 
     const timer = setTimeout(() => {
       isHoldingMouse = true;
-    }, 500);
+    }, 100);
 
     function handleCardMouseUp() {
       clearEventListenersAndTimer();
@@ -137,9 +139,15 @@ export function BaseCard({
       }
     }
 
+    function handleCardMouseMove() {
+      isHoldingMouse = true;
+      console.log("move");
+    }
+
     function clearEventListenersAndTimer() {
       e.target.removeEventListener("mouseup", handleCardMouseUp);
       e.target.removeEventListener("mouseleave", handleCardMouseUp);
+      e.target.removeEventListener("mousemove", handleCardMouseMove);
       clearTimeout(timer);
     }
   }
@@ -148,7 +156,7 @@ export function BaseCard({
     <CardDialogContent
       dialogTrigger={dialogTrigger}
       dialogTitle="Edit"
-      originalCardTitle={title}
+      originalCardInfo={currentCardInfo}
       confirmButtonText="Save changes"
       confirmButtonFunction={editCard}
     />

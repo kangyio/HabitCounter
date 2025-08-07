@@ -21,6 +21,14 @@ type BarChartData = {
   count: number;
 };
 
+type CardLayout = {
+  i: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+};
+
 type Month =
   | "January"
   | "February"

@@ -1,4 +1,4 @@
-import { useRef, useState, type JSX } from "react";
+import { useRef, useState, useEffect, type JSX } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,19 +16,24 @@ import { AlertForNoTitle } from "@/components/AlertForNoTitle";
 export function CardDialogContent({
   dialogTrigger,
   dialogTitle,
-  originalCardTitle,
+  originalCardInfo,
   confirmButtonText,
   confirmButtonFunction
 }: {
   dialogTrigger: JSX.Element;
   dialogTitle: DialogTitle;
-  originalCardTitle: string;
+  originalCardInfo: CardInfo | undefined;
   confirmButtonText: string;
   confirmButtonFunction: DialogConfirmButtonFunction;
 }) {
   const nameInputRef = useRef<HTMLInputElement>(null);
-  const [hex, setHex] = useState("#F44E3B");
+  const [hex, setHex] = useState("#8BC34A");
   const [isTitleValid, setIsTitleValid] = useState(true);
+
+  useEffect(() => {
+    if (originalCardInfo) setHex(originalCardInfo.color);
+    else setHex("#8BC34A");
+  }, [originalCardInfo]);
 
   function getCardInfo(): CardInfo {
     return {
@@ -74,7 +79,7 @@ export function CardDialogContent({
               id="name"
               name="name"
               placeholder="Enter a title"
-              defaultValue={originalCardTitle}
+              defaultValue={originalCardInfo?.title}
               ref={nameInputRef}
             />
           </div>

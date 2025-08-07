@@ -15,7 +15,7 @@ function App() {
 
   return (
     <main
-      className="flex flex-col min-h-svh items-center bg-stone-700 gap-0.5 relative"
+      className="min-h-svh bg-stone-700 relative"
       style={{
         backgroundImage: "radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px)",
         backgroundSize: "25px 25px"
@@ -39,3 +39,9 @@ function App() {
 }
 
 export default App;
+
+//TODO
+// Drag cards to rearrange in grid
+// Add search button
+// Add go to top button
+// Add config⚙️ button
