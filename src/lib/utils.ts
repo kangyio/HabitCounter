@@ -45,9 +45,34 @@ export function electronAPI_clickAction(cards: CardInfo[]) {
   });
 }
 
+export function electronAPI_dragAction(cardLayoutArray: CardLayout[]) {
+  const sanitizedArray = cardLayoutArray.map(cardLayout => {
+    return {
+      i: cardLayout.i,
+      x: cardLayout.x,
+      y: cardLayout.y,
+      w: cardLayout.w,
+      h: cardLayout.h
+    };
+  });
+
+  window.electronAPI.dragAction({
+    type: "drag:send_cardLayout",
+    cardLayoutArray: sanitizedArray
+  });
+}
+
 export async function getCardInfoArrayFromDB(
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>
 ) {
   const cardInfoArray = await window.electronAPI.getCardInfoArray();
   setCards(JSON.parse(cardInfoArray));
+}
+
+export async function getCardLayoutArrayFromDB(
+  setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>
+) {
+  const cardLayoutArray = await window.electronAPI.getCardLayoutArray();
+  setCardLayoutArray(JSON.parse(cardLayoutArray));
+  // return JSON.parse(cardLayoutArray);
 }

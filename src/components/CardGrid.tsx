@@ -1,7 +1,13 @@
-import { useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
+import GridLayout from "react-grid-layout";
+
 import { BaseCard } from "@/components/BaseCard.tsx";
 import { BottomDrawer } from "@/components/BottomDrawer";
-import GridLayout from "react-grid-layout";
+import {
+  electronAPI_dragAction,
+  getCardInfoArrayFromDB,
+  getCardLayoutArrayFromDB
+} from "@/lib/utils";
 
 export function CardGrid({
   cards,
@@ -12,48 +18,36 @@ export function CardGrid({
 }) {
   const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
 
-  const { cardsLayoutArray, renderedBaseCards } = generateLayoutAndCards();
+  useEffect(() => {
+    getCardInfoArrayFromDB(setCards);
+    getCardLayoutArrayFromDB(setCardLayoutArray);
+  }, []);
 
-  function generateLayoutAndCards() {
-    const cardsLayoutArray: CardLayout[] = [];
-    const renderedBaseCards: JSX.Element[] = [];
-
-    for (let i = 0; i < cards.length; i++) {
-      const cardInfo = cards[i];
-
-      // Build layout
-      cardsLayoutArray.push({
-        i: String(cardInfo.createdAt),
-        x: 1,
-        y: i,
-        w: 1,
-        h: 1
-      });
-
-      // Build rendered card
-      renderedBaseCards.push(
-        <div key={cardInfo.createdAt}>
-          <BaseCard
-            key={cardInfo.createdAt}
-            cards={cards}
-            setCards={setCards}
-            currentCardInfo={cardInfo}
-            setCurrentCardInfo={setCurrentCardInfo}
-            setIsDrawerOpen={setIsDrawerOpen}
-          />
-        </div>
-      );
-    }
-
-    return { cardsLayoutArray, renderedBaseCards };
-  }
+  const renderedBaseCards = cards.map(cardInfo => {
+    return (
+      <div key={cardInfo.createdAt}>
+        <BaseCard
+          key={cardInfo.createdAt}
+          cards={cards}
+          setCards={setCards}
+          currentCardInfo={cardInfo}
+          setCurrentCardInfo={setCurrentCardInfo}
+          setIsDrawerOpen={setIsDrawerOpen}
+        />
+      </div>
+    );
+  });
 
   return (
     <section className="">
       <GridLayout
         className="layout"
-        layout={cardsLayoutArray}
+        layout={cardLayoutArray}
+        onLayoutChange={newLayout => {
+          electronAPI_dragAction(newLayout);
+        }}
         cols={3}
         width={window.innerWidth}
         rowHeight={134}

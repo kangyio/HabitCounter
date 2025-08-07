@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { AddCardButton } from "@/components/AddCardButton.tsx";
 import { CardGrid } from "@/components/CardGrid";
 
-import { getCardInfoArrayFromDB } from "@/lib/utils";
-
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
-
-  useEffect(() => {
-    getCardInfoArrayFromDB(setCards);
-  }, []);
 
   return (
     <main

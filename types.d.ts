@@ -1,7 +1,12 @@
-type Action = {
-  type: "click:send_cardInfo";
-  cardInfoArray: CardInfo[];
-};
+type Action =
+  | {
+      type: "click:send_cardInfo";
+      cardInfoArray: CardInfo[];
+    }
+  | {
+      type: "drag:send_cardLayout";
+      cardLayoutArray: CardLayout[];
+    };
 
 type CardInfo = {
   createdAt: number;
@@ -45,7 +50,9 @@ type Month =
 
 interface Window {
   electronAPI: {
+    dragAction: (action: Action) => void;
     clickAction: (action: Action) => void;
     getCardInfoArray: () => string;
+    getCardLayoutArray: () => string;
   };
 }
