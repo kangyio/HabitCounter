@@ -19,7 +19,7 @@ type DialogConfirmButtonFunction =
   | ((cardInfo: CardInfo) => void)
   | ((inputValue: string | undefined, inputHex: string) => void);
 
-type DialogTitle = "Add Counter" | "Edit";
+type DialogTitle = "Add Counter" | "Edit" | "Search Counter";
 
 type BarChartData = {
   month: Month;
@@ -47,6 +47,15 @@ type Month =
   | "October"
   | "November"
   | "December";
+
+type ControlButtonType = "add" | "search";
+
+type BigControlButtonProps = {
+  type: ControlButtonType;
+  cards: CardInfo[];
+  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  icon: ReactElement<React.ComponentProps<LucideIcon>>;
+};
 
 interface Window {
   electronAPI: {

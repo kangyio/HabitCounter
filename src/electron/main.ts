@@ -7,6 +7,7 @@ app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 850,
+    // resizable: false,
     webPreferences: {
       preload: getPreloadPath()
     }

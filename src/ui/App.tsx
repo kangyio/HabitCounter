@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { AddCardButton } from "@/components/AddCardButton.tsx";
+import { ButtonControl } from "@/components/ButtonControl.tsx";
 import { CardGrid } from "@/components/CardGrid";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         defaultTheme="dark"
         storageKey="vite-ui-theme"
       >
-        <AddCardButton
+        <ButtonControl
           cards={cards}
           setCards={setCards}
         />
@@ -35,7 +35,7 @@ function App() {
 export default App;
 
 //TODO
-// Drag cards to rearrange in grid
+//✅ Drag cards to rearrange in grid
 // Add search button
 // Add go to top button
 // Add config⚙️ button

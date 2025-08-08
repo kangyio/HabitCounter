@@ -59,7 +59,13 @@ export function CardDialogContent({
         nameInputRef.current?.value,
         hex
       );
+    } else if (dialogTitle === "Search Counter") {
+      return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
     }
+  }
+
+  function shouldDisplayColorPicker() {
+    return dialogTitle === "Add Counter" || dialogTitle === "Edit";
   }
 
   return (
@@ -83,20 +89,22 @@ export function CardDialogContent({
               ref={nameInputRef}
             />
           </div>
-          {isTitleValid ? null : <AlertForNoTitle />}
-          <div className="grid gap-4">
-            <Label
-              htmlFor="color"
-              className="p-3 rounded-xl"
-              style={{ backgroundColor: hex }}
-            >
-              Color
-            </Label>
-            <ColorPicker
-              hex={hex}
-              setHex={setHex}
-            />
-          </div>
+          {!isTitleValid && <AlertForNoTitle />}
+          {shouldDisplayColorPicker() && (
+            <div className="grid gap-4">
+              <Label
+                htmlFor="color"
+                className="p-3 rounded-xl"
+                style={{ backgroundColor: hex }}
+              >
+                Color
+              </Label>
+              <ColorPicker
+                hex={hex}
+                setHex={setHex}
+              />
+            </div>
+          )}
         </div>
         <DialogFooter>
           <DialogClose asChild>
@@ -110,7 +118,7 @@ export function CardDialogContent({
           <DialogClose asChild>
             <Button
               name="confirm"
-              onClick={e => handleConfirmButtonClick(e)}
+              onClick={handleConfirmButtonClick}
             >
               {confirmButtonText}
             </Button>

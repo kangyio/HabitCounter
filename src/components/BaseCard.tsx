@@ -1,5 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect } from "react";
+import { clsx } from "clsx";
+import { Card, CardContent } from "@/components/ui/card";
 import { ProcessCountButton } from "./ProcessCountButton";
 import { CountContext } from "./CountContext";
 import { displayTimePast, electronAPI_clickAction } from "@/lib/utils";
@@ -45,7 +46,7 @@ export function BaseCard({
           value={{ countNumber, setCountNumber, currentCardInfo, setCurrentCardInfo }}
         >
           <Card
-            className="w-[276px] cursor-pointer"
+            className={clsx("w-[276px] cursor-pointer", "outline-4 outline-slate-200")}
             style={{ backgroundColor: color }}
             onMouseDown={handleCardMouseDown}
           >

@@ -16,9 +16,9 @@ export function CardGrid({
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
 }) {
-  const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
+  const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
 
   useEffect(() => {
     getCardInfoArrayFromDB(setCards);
@@ -45,7 +45,7 @@ export function CardGrid({
       <GridLayout
         className="layout"
         layout={cardLayoutArray}
-        onLayoutChange={newLayout => electronAPI_dragAction(newLayout)}
+        onLayoutChange={electronAPI_dragAction}
         cols={3}
         width={900}
         rowHeight={134}
