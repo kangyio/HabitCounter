@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState } from "react";
 import GridLayout from "react-grid-layout";
 
 import { BaseCard } from "@/components/BaseCard.tsx";
@@ -45,11 +45,9 @@ export function CardGrid({
       <GridLayout
         className="layout"
         layout={cardLayoutArray}
-        onLayoutChange={newLayout => {
-          electronAPI_dragAction(newLayout);
-        }}
+        onLayoutChange={newLayout => electronAPI_dragAction(newLayout)}
         cols={3}
-        width={window.innerWidth}
+        width={900}
         rowHeight={134}
         isResizable={false}
         draggableHandle=".move_icon"

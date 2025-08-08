@@ -69,7 +69,7 @@ export function BaseCard({
                 />
                 <div className="fixed">
                   <MoveIcon
-                    className="move_icon absolute right-28 top-[-18px]"
+                    className="move_icon absolute cursor-move right-28 top-[-18px]"
                     size={20}
                   />
                 </div>

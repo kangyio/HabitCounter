@@ -74,5 +74,4 @@ export async function getCardLayoutArrayFromDB(
 ) {
   const cardLayoutArray = await window.electronAPI.getCardLayoutArray();
   setCardLayoutArray(JSON.parse(cardLayoutArray));
-  // return JSON.parse(cardLayoutArray);
 }

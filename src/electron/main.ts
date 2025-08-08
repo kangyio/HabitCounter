@@ -1,12 +1,11 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
-import fsPromises from "node:fs/promises";
-import { isDev } from "./util.js";
+import { isDev, readFromDB, writeToDB } from "./util.js";
 import { getPreloadPath } from "./pathResolver.js";
 
 app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1200,
     height: 850,
     webPreferences: {
       preload: getPreloadPath()
@@ -47,26 +46,4 @@ app.whenReady().then(() => {
       );
     }
   });
-
-  async function writeToDB(cardInfoArray: CardInfo[], fileName: string) {
-    const filePath = path.join(app.getAppPath(), "src", "electron", fileName);
-
-    try {
-      await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
-    } catch (err) {
-      if (err instanceof Error) console.log(err.message);
-      console.log(String(err));
-    }
-  }
-
-  async function readFromDB(fileName: string) {
-    const filePath = path.join(app.getAppPath(), "src", "electron", fileName);
-
-    try {
-      return await fsPromises.readFile(filePath, "utf-8");
-    } catch (err) {
-      if (err instanceof Error) console.log(err.message);
-      console.log(String(err));
-    }
-  }
 });
