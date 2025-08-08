@@ -6,6 +6,7 @@ import { CardGrid } from "@/components/CardGrid";
 
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
+  const [searchTargetIds, setSearchTargetIds] = useState<Set<number>>(new Set());
 
   return (
     <main
@@ -22,10 +23,13 @@ function App() {
         <ButtonControl
           cards={cards}
           setCards={setCards}
+          searchTargetIds={searchTargetIds}
+          setSearchTargetIds={setSearchTargetIds}
         />
         <CardGrid
           cards={cards}
           setCards={setCards}
+          searchTargetIds={searchTargetIds}
         />
       </ThemeProvider>
     </main>

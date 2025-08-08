@@ -5,10 +5,14 @@ import { AddCardButton } from "./AddCardButton";
 
 export function ButtonControl({
   cards,
-  setCards
+  setCards,
+  searchTargetIds,
+  setSearchTargetIds
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  searchTargetIds: Set<number>;
+  setSearchTargetIds: React.Dispatch<React.SetStateAction<Set<number>>>;
 }) {
   return (
     <div className="fixed top-4 right-4 grid columns-1 items-start gap-4 z-50">
@@ -16,7 +20,12 @@ export function ButtonControl({
         cards={cards}
         setCards={setCards}
       />
-      <SearchCardButton cards={cards} />
+      <SearchCardButton
+        cards={cards}
+        setCards={setCards}
+        searchTargetIds={searchTargetIds}
+        setSearchTargetIds={setSearchTargetIds}
+      />
       {/* <BigControlButton
         type="add"
         cards={cards}

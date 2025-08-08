@@ -19,12 +19,14 @@ export function BaseCard({
   setCards,
   currentCardInfo,
   setCurrentCardInfo,
+  searchTargetIds,
   setIsDrawerOpen
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   currentCardInfo: CardInfo;
   setCurrentCardInfo: React.Dispatch<React.SetStateAction<CardInfo | undefined>>;
+  searchTargetIds: Set<number>;
   setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [countNumber, setCountNumber] = useState(0);
@@ -46,7 +48,7 @@ export function BaseCard({
           value={{ countNumber, setCountNumber, currentCardInfo, setCurrentCardInfo }}
         >
           <Card
-            className={clsx("w-[276px] cursor-pointer", "outline-4 outline-slate-200")}
+            className="w-[276px] cursor-pointer"
             style={{ backgroundColor: color }}
             onMouseDown={handleCardMouseDown}
           >

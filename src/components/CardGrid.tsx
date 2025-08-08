@@ -11,10 +11,12 @@ import {
 
 export function CardGrid({
   cards,
-  setCards
+  setCards,
+  searchTargetIds
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  searchTargetIds: Set<number>;
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
@@ -34,6 +36,7 @@ export function CardGrid({
           setCards={setCards}
           currentCardInfo={cardInfo}
           setCurrentCardInfo={setCurrentCardInfo}
+          searchTargetIds={searchTargetIds}
           setIsDrawerOpen={setIsDrawerOpen}
         />
       </div>
