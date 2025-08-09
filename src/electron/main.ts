@@ -5,10 +5,10 @@ import { getPreloadPath } from "./pathResolver.js";
 
 app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 900,
     height: 850,
     autoHideMenuBar: true,
-    // resizable: false,
+    resizable: false,
     webPreferences: {
       preload: getPreloadPath()
     }
