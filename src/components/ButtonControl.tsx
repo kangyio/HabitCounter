@@ -1,5 +1,6 @@
 import { SearchCardButton } from "./SearchCardButton";
 import { AddCardButton } from "./AddCardButton";
+import { BackToTopButton } from "./BackToTopButton";
 // import { DebugButton } from "./DebugButton";
 
 export function ButtonControl({
@@ -18,7 +19,7 @@ export function ButtonControl({
   setSearchTarget: React.Dispatch<React.SetStateAction<SearchTarget>>;
 }) {
   return (
-    <div className="fixed top-4 right-4 grid columns-1 items-start gap-4 z-50">
+    <div className="fixed top-4 right-4 flex flex-col gap-4 z-50 ">
       <AddCardButton
         cards={cards}
         setCards={setCards}
@@ -32,6 +33,7 @@ export function ButtonControl({
         searchTarget={searchTarget}
         setSearchTarget={setSearchTarget}
       />
+      <BackToTopButton />
       {/* <DebugButton
         cards={cards}
         setCards={setCards}
