@@ -15,7 +15,7 @@ export function AddCardButton({
   const dialogTrigger = (
     <DialogTrigger asChild>
       {!searchTarget.isSearching && (
-        <button className="bg-slate-100 p-2 rounded-xl text-2xl cursor-pointer transition-transform duration-200 active:scale-95">
+        <button className="bg-slate-100 p-2 rounded-xl cursor-pointer transition-transform duration-200 active:scale-95">
           <FilePlusIcon
             color={"#0c0a09"}
             size={40}
