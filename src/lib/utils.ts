@@ -45,6 +45,12 @@ export function electronAPI_clickAction(cards: CardInfo[]) {
   });
 }
 
+export function electronAPI_quitApp() {
+  window.electronAPI.clickAction({
+    type: "click:quitApp"
+  });
+}
+
 export function electronAPI_dragAction(cardLayoutArray: CardLayout[]) {
   const sanitizedArray = cardLayoutArray.map(cardLayout => {
     return {

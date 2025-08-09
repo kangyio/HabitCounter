@@ -7,6 +7,7 @@ app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 850,
+    autoHideMenuBar: true,
     // resizable: false,
     webPreferences: {
       preload: getPreloadPath()
@@ -28,23 +29,17 @@ app.whenReady().then(() => {
   // Renderer ➡️ Main
 
   ipcMain.on("clickAction", async (_event, action) => {
-    await writeToDB(action.cardInfoArray, "cards.json");
-
-    //TODO For debugging only, delete later
-    console.log("CardInfo Received: ", Date.now());
-    for (const cardInfo of action.cardInfoArray) {
-      console.log(`${cardInfo.title}, ${cardInfo.updatedAt.length}, ${cardInfo.color}`);
+    switch (action.type) {
+      case "click:send_cardInfo":
+        await writeToDB(action.cardInfoArray, "cards.json");
+        break;
+      case "click:quitApp":
+        app.quit();
+        break;
     }
-    //TODO END
   });
 
   ipcMain.on("dragAction", async (_event, action) => {
     await writeToDB(action.cardLayoutArray, "cardLayout.json");
-    console.log("CardLayout Received: ", Date.now());
-    for (const cardLayout of action.cardLayoutArray) {
-      console.log(
-        `${cardLayout.i}, ${cardLayout.x}, ${cardLayout.y}, ${cardLayout.w}, ${cardLayout.h}`
-      );
-    }
   });
 });

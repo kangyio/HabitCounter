@@ -6,6 +6,9 @@ type Action =
   | {
       type: "drag:send_cardLayout";
       cardLayoutArray: CardLayout[];
+    }
+  | {
+      type: "click:quitApp";
     };
 
 type CardInfo = {

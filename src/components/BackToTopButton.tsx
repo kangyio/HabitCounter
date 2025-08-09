@@ -20,7 +20,7 @@ export function BackToTopButton() {
   return (
     <button
       className={`bg-slate-100 p-2 rounded-xl cursor-pointer transition-transform duration-200 active:scale-95 ${
-        isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
+        isScrolled ? "flex" : "hidden"
       }`}
       onClick={scrollToTop}
     >
