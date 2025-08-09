@@ -1,24 +1,22 @@
 import { BugIcon } from "lucide-react";
-import { getCardInfoArrayFromDB } from "@/lib/utils";
 
 export function DebugButton({
   cards,
   setCards,
   cardLayoutArray,
   setCardLayoutArray,
-  searchTargetIds,
-  setSearchTargetIds
+  searchTarget,
+  setSearchTarget
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   cardLayoutArray: CardLayout[];
   setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>;
-  searchTargetIds: Set<number>;
-  setSearchTargetIds: React.Dispatch<React.SetStateAction<Set<number>>>;
+  searchTarget: SearchTarget;
+  setSearchTarget: React.Dispatch<React.SetStateAction<SearchTarget>>;
 }) {
   function handleClick() {
     console.log("cardLayoutArray: ", cardLayoutArray);
-    setCardLayoutArray(cardLayoutArray);
   }
 
   return (

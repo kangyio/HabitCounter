@@ -5,19 +5,23 @@ import { FilePlusIcon } from "lucide-react";
 
 export function AddCardButton({
   cards,
-  setCards
+  setCards,
+  searchTarget
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  searchTarget: SearchTarget;
 }) {
   const dialogTrigger = (
     <DialogTrigger asChild>
-      <button className="bg-slate-100 p-2 rounded-xl text-2xl cursor-pointer transition-transform duration-200 active:scale-95 z-50">
-        <FilePlusIcon
-          color={"#0c0a09"}
-          size={40}
-        />
-      </button>
+      {!searchTarget.isSearching && (
+        <button className="bg-slate-100 p-2 rounded-xl text-2xl cursor-pointer transition-transform duration-200 active:scale-95 z-50">
+          <FilePlusIcon
+            color={"#0c0a09"}
+            size={40}
+          />
+        </button>
+      )}
     </DialogTrigger>
   );
 

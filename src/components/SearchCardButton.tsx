@@ -8,15 +8,15 @@ export function SearchCardButton({
   setCards,
   cardLayoutArray,
   setCardLayoutArray,
-  searchTargetIds,
-  setSearchTargetIds
+  searchTarget,
+  setSearchTarget
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   cardLayoutArray: CardLayout[];
   setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>;
-  searchTargetIds: Set<number>;
-  setSearchTargetIds: React.Dispatch<React.SetStateAction<Set<number>>>;
+  searchTarget: SearchTarget;
+  setSearchTarget: React.Dispatch<React.SetStateAction<SearchTarget>>;
 }) {
   // Store original state before search
   const originalCardsRef = useRef<CardInfo[]>([]);
@@ -55,26 +55,29 @@ export function SearchCardButton({
     }
 
     function handleToggleSearchTarget(cardInfo: CardInfo) {
-      setSearchTargetIds(prev => {
-        const newSet = new Set(prev);
+      setSearchTarget(prev => {
+        const newSet = new Set(prev.idSet);
         if (newSet.has(cardInfo.createdAt)) {
           newSet.delete(cardInfo.createdAt);
         } else {
           newSet.add(cardInfo.createdAt);
         }
-        return newSet;
+        return { idSet: newSet, isSearching: true };
       });
     }
   }
 
   function clearSearch() {
+    // Set searching flag before restoring
+    setSearchTarget({ ...searchTarget, isSearching: true });
+
     // Restore original state
     setCards(originalCardsRef.current);
     setCardLayoutArray(originalLayoutRef.current);
-    setSearchTargetIds(new Set());
+    setSearchTarget({ ...searchTarget, idSet: new Set() });
   }
 
-  return searchTargetIds.size === 0 ? (
+  return searchTarget.idSet.size === 0 ? (
     <CardDialogContent
       dialogTrigger={dialogTrigger}
       dialogTitle="Search Counter"

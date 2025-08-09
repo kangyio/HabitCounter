@@ -10,13 +10,15 @@ export function CardGrid({
   setCards,
   cardLayoutArray,
   setCardLayoutArray,
-  searchTargetIds
+  searchTarget,
+  setSearchTarget
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   cardLayoutArray: CardLayout[];
   setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>;
-  searchTargetIds: Set<number>;
+  searchTarget: SearchTarget;
+  setSearchTarget: React.Dispatch<React.SetStateAction<SearchTarget>>;
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
@@ -30,7 +32,7 @@ export function CardGrid({
           setCards={setCards}
           currentCardInfo={cardInfo}
           setCurrentCardInfo={setCurrentCardInfo}
-          searchTargetIds={searchTargetIds}
+          searchTarget={searchTarget}
           setIsDrawerOpen={setIsDrawerOpen}
         />
       </div>
@@ -38,8 +40,12 @@ export function CardGrid({
   });
 
   function handleLayoutChange(cardLayoutArray: CardLayout[]) {
-    console.log("handleLayoutChange-searchTargetIds.size: ", searchTargetIds.size);
-    if (searchTargetIds.size) return;
+    if (searchTarget.idSet.size) return;
+    if (searchTarget.isSearching) {
+      setSearchTarget({ ...searchTarget, isSearching: false });
+      return;
+    }
+
     console.log("write to DB");
     setCardLayoutArray(cardLayoutArray);
     electronAPI_dragAction(cardLayoutArray);

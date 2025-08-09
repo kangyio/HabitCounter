@@ -57,6 +57,11 @@ type BigControlButtonProps = {
   icon: ReactElement<React.ComponentProps<LucideIcon>>;
 };
 
+type SearchTarget = {
+  idSet: set<number>;
+  isSearching: boolean;
+};
+
 interface Window {
   electronAPI: {
     dragAction: (action: Action) => void;

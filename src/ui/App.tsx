@@ -8,7 +8,10 @@ import { getCardInfoArrayFromDB, getCardLayoutArrayFromDB } from "@/lib/utils";
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
   const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
-  const [searchTargetIds, setSearchTargetIds] = useState<Set<number>>(new Set());
+  const [searchTarget, setSearchTarget] = useState<SearchTarget>({
+    idSet: new Set(),
+    isSearching: false
+  });
 
   useEffect(() => {
     getCardInfoArrayFromDB(setCards);
@@ -32,15 +35,16 @@ function App() {
           setCards={setCards}
           cardLayoutArray={cardLayoutArray}
           setCardLayoutArray={setCardLayoutArray}
-          searchTargetIds={searchTargetIds}
-          setSearchTargetIds={setSearchTargetIds}
+          searchTarget={searchTarget}
+          setSearchTarget={setSearchTarget}
         />
         <CardGrid
           cards={cards}
           setCards={setCards}
           cardLayoutArray={cardLayoutArray}
           setCardLayoutArray={setCardLayoutArray}
-          searchTargetIds={searchTargetIds}
+          searchTarget={searchTarget}
+          setSearchTarget={setSearchTarget}
         />
       </ThemeProvider>
     </main>

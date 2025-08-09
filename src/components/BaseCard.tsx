@@ -18,13 +18,14 @@ export function BaseCard({
   setCards,
   currentCardInfo,
   setCurrentCardInfo,
+  searchTarget,
   setIsDrawerOpen
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   currentCardInfo: CardInfo;
   setCurrentCardInfo: React.Dispatch<React.SetStateAction<CardInfo | undefined>>;
-  searchTargetIds: Set<number>;
+  searchTarget: SearchTarget;
   setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [countNumber, setCountNumber] = useState(0);
@@ -69,10 +70,12 @@ export function BaseCard({
                   cards={cards}
                 />
                 <div className="fixed">
-                  <MoveIcon
-                    className="move_icon absolute cursor-move right-28 top-[-18px]"
-                    size={20}
-                  />
+                  {!searchTarget.isSearching && (
+                    <MoveIcon
+                      className="move_icon absolute cursor-move right-28 top-[-18px]"
+                      size={20}
+                    />
+                  )}
                 </div>
               </section>
             </CardContent>
@@ -148,7 +151,6 @@ export function BaseCard({
 
     function handleCardMouseMove() {
       isHoldingMouse = true;
-      console.log("move");
     }
 
     function clearEventListenersAndTimer() {
