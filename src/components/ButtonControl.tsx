@@ -2,7 +2,6 @@ import { SearchCardButton } from "./SearchCardButton";
 import { AddCardButton } from "./AddCardButton";
 import { BackToTopButton } from "./BackToTopButton";
 import { QuitAppButton } from "./QuitAppButton";
-// import { DebugButton } from "./DebugButton";
 
 export function ButtonControl({
   cards,
@@ -36,14 +35,6 @@ export function ButtonControl({
       />
       <QuitAppButton />
       <BackToTopButton />
-      {/* <DebugButton
-        cards={cards}
-        setCards={setCards}
-        cardLayoutArray={cardLayoutArray}
-        setCardLayoutArray={setCardLayoutArray}
-        searchTarget={searchTarget}
-        setSearchTarget={setSearchTarget}
-      /> */}
     </div>
   );
 }

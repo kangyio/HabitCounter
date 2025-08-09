@@ -10,7 +10,7 @@ export function BackToTopButton() {
   }, []);
 
   function handleScroll() {
-    setIsScrolled(window.scrollY > 500); // Show after 100px scroll
+    setIsScrolled(window.scrollY > 500);
   }
 
   function scrollToTop() {

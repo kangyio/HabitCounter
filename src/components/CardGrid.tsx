@@ -46,7 +46,6 @@ export function CardGrid({
       return;
     }
 
-    console.log("write to DB");
     setCardLayoutArray(cardLayoutArray);
     electronAPI_dragAction(cardLayoutArray);
   }

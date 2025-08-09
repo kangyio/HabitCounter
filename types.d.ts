@@ -51,15 +51,6 @@ type Month =
   | "November"
   | "December";
 
-type ControlButtonType = "add" | "search";
-
-type BigControlButtonProps = {
-  type: ControlButtonType;
-  cards: CardInfo[];
-  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  icon: ReactElement<React.ComponentProps<LucideIcon>>;
-};
-
 type SearchTarget = {
   idSet: set<number>;
   isSearching: boolean;
