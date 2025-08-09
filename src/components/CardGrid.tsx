@@ -1,31 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GridLayout from "react-grid-layout";
 
 import { BaseCard } from "@/components/BaseCard.tsx";
 import { BottomDrawer } from "@/components/BottomDrawer";
-import {
-  electronAPI_dragAction,
-  getCardInfoArrayFromDB,
-  getCardLayoutArrayFromDB
-} from "@/lib/utils";
+import { electronAPI_dragAction } from "@/lib/utils";
 
 export function CardGrid({
   cards,
   setCards,
+  cardLayoutArray,
+  setCardLayoutArray,
   searchTargetIds
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  cardLayoutArray: CardLayout[];
+  setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>;
   searchTargetIds: Set<number>;
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
   const [currentCardInfo, setCurrentCardInfo] = useState<CardInfo | undefined>(undefined);
-
-  useEffect(() => {
-    getCardInfoArrayFromDB(setCards);
-    getCardLayoutArrayFromDB(setCardLayoutArray);
-  }, []);
 
   const renderedBaseCards = cards.map(cardInfo => {
     return (
@@ -43,12 +37,20 @@ export function CardGrid({
     );
   });
 
+  function handleLayoutChange(cardLayoutArray: CardLayout[]) {
+    console.log("handleLayoutChange-searchTargetIds.size: ", searchTargetIds.size);
+    if (searchTargetIds.size) return;
+    console.log("write to DB");
+    setCardLayoutArray(cardLayoutArray);
+    electronAPI_dragAction(cardLayoutArray);
+  }
+
   return (
     <section className="">
       <GridLayout
         className="layout"
         layout={cardLayoutArray}
-        onLayoutChange={electronAPI_dragAction}
+        onLayoutChange={handleLayoutChange}
         cols={3}
         width={900}
         rowHeight={134}

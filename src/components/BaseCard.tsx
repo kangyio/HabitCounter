@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { clsx } from "clsx";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProcessCountButton } from "./ProcessCountButton";
 import { CountContext } from "./CountContext";
@@ -19,7 +18,6 @@ export function BaseCard({
   setCards,
   currentCardInfo,
   setCurrentCardInfo,
-  searchTargetIds,
   setIsDrawerOpen
 }: {
   cards: CardInfo[];

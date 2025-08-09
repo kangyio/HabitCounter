@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ButtonControl } from "@/components/ButtonControl.tsx";
 import { CardGrid } from "@/components/CardGrid";
+import { getCardInfoArrayFromDB, getCardLayoutArrayFromDB } from "@/lib/utils";
 
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
+  const [cardLayoutArray, setCardLayoutArray] = useState<CardLayout[]>([]);
   const [searchTargetIds, setSearchTargetIds] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    getCardInfoArrayFromDB(setCards);
+    getCardLayoutArrayFromDB(setCardLayoutArray);
+  }, []);
 
   return (
     <main
@@ -23,12 +30,16 @@ function App() {
         <ButtonControl
           cards={cards}
           setCards={setCards}
+          cardLayoutArray={cardLayoutArray}
+          setCardLayoutArray={setCardLayoutArray}
           searchTargetIds={searchTargetIds}
           setSearchTargetIds={setSearchTargetIds}
         />
         <CardGrid
           cards={cards}
           setCards={setCards}
+          cardLayoutArray={cardLayoutArray}
+          setCardLayoutArray={setCardLayoutArray}
           searchTargetIds={searchTargetIds}
         />
       </ThemeProvider>

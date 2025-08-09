@@ -1,16 +1,19 @@
 import { SearchCardButton } from "./SearchCardButton";
 import { AddCardButton } from "./AddCardButton";
-// import { BigControlButton } from "./BigControlButton";
-// import { FilePlusIcon, SearchIcon } from "lucide-react";
+import { DebugButton } from "./DebugButton";
 
 export function ButtonControl({
   cards,
   setCards,
+  cardLayoutArray,
+  setCardLayoutArray,
   searchTargetIds,
   setSearchTargetIds
 }: {
   cards: CardInfo[];
   setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  cardLayoutArray: CardLayout[];
+  setCardLayoutArray: React.Dispatch<React.SetStateAction<CardLayout[]>>;
   searchTargetIds: Set<number>;
   setSearchTargetIds: React.Dispatch<React.SetStateAction<Set<number>>>;
 }) {
@@ -23,21 +26,19 @@ export function ButtonControl({
       <SearchCardButton
         cards={cards}
         setCards={setCards}
+        cardLayoutArray={cardLayoutArray}
+        setCardLayoutArray={setCardLayoutArray}
         searchTargetIds={searchTargetIds}
         setSearchTargetIds={setSearchTargetIds}
       />
-      {/* <BigControlButton
-        type="add"
+      <DebugButton
         cards={cards}
         setCards={setCards}
-        icon={<FilePlusIcon />}
+        cardLayoutArray={cardLayoutArray}
+        setCardLayoutArray={setCardLayoutArray}
+        searchTargetIds={searchTargetIds}
+        setSearchTargetIds={setSearchTargetIds}
       />
-      <BigControlButton
-        type="search"
-        cards={cards}
-        setCards={setCards}
-        icon={<SearchIcon />}
-      /> */}
     </div>
   );
 }
