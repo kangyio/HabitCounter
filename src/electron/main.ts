@@ -3,8 +3,21 @@ import path from "node:path";
 import { isDev, readFromDB, writeToDB } from "./util.js";
 import { getPreloadPath } from "./pathResolver.js";
 
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) app.quit();
+
+let mainWindow: BrowserWindow | null = null;
+
+app.on("second-instance", () => {
+  // Focus the existing window if a second instance is launched
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+});
+
 app.whenReady().then(() => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 975,
     height: 850,
     autoHideMenuBar: true,

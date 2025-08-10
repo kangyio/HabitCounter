@@ -57,5 +57,5 @@ export default App;
 //✅ Drag cards to rearrange in grid
 //✅ Add search button
 //✅ Add go to top button
-// Add exit button
+//✅ Add exit button
 // Add config⚙️ button

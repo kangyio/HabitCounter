@@ -12,9 +12,8 @@ dist
 dist-ssr
 dist-react
 dist-electron
-src/electron/cards.json
-src/electron/cardLayout.json
 *.local
+.npmrc
 
 # Editor directories and files
 .vscode/*

@@ -1,7 +1,15 @@
 {
-  "name": "electron-tutorial",
-  "private": true,
-  "version": "0.0.0",
+  "name": "habit-counter",
+  "version": "1.0.0",
+  "description": "A minimalist habit counter app",
+  "keywords": [
+    "habit",
+    "counter",
+    "tracker",
+    "minimal"
+  ],
+  "license": "MIT",
+  "author": "kangyio",
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {

@@ -87,7 +87,7 @@ export function SearchCardButton({
     />
   ) : (
     <button
-      className="bg-slate-100 p-2 rounded-xl text-2xl cursor-pointer transition-transform duration-200 active:scale-95 z-50"
+      className="bg-slate-100 p-2 rounded-xl text-2xl cursor-pointer transition-transform duration-200 active:scale-95"
       onClick={clearSearch}
     >
       <SearchXIcon

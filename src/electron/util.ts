@@ -8,9 +8,8 @@ export function isDev(): boolean {
 }
 
 export async function writeToDB(cardInfoArray: CardInfo[], fileName: string) {
-  const filePath = path.join(app.getAppPath(), "src", "electron", fileName);
-
   try {
+    const filePath = path.join(app.getPath("userData"), fileName);
     await fsPromises.writeFile(filePath, JSON.stringify(cardInfoArray));
   } catch (err) {
     if (err instanceof Error) console.log(err.message);
@@ -20,7 +19,7 @@ export async function writeToDB(cardInfoArray: CardInfo[], fileName: string) {
 
 export async function readFromDB(fileName: string) {
   try {
-    const filePath = path.join(app.getAppPath(), "src", "electron", fileName);
+    const filePath = path.join(app.getPath("userData"), fileName);
     if (!existsSync(filePath)) await initializeDB(filePath, fileName);
 
     return await fsPromises.readFile(filePath, "utf-8");
