@@ -44,11 +44,14 @@ export function SearchCardButton({
 
     // Filter the layout to only include layouts for the target cards
     const targetCardIds = new Set(targetCards.map(card => card.createdAt.toString()));
+    if (targetCardIds.size === 0) return null; // No cards found
     const filteredLayout = cardLayoutArray.filter(layout => targetCardIds.has(layout.i));
 
     targetCards.forEach(cardInfo => handleToggleSearchTarget(cardInfo));
     setCards(targetCards);
     setCardLayoutArray(filteredLayout);
+
+    return targetCards;
 
     function sanitizeTitle(title: string) {
       return title.toLowerCase().replaceAll(" ", "");

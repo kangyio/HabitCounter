@@ -51,16 +51,24 @@ export function CardDialogContent({
       return;
     }
 
-    setIsTitleValid(true);
     if (dialogTitle === "Add Counter") {
-      return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
+      setIsTitleValid(true);
+      (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
     } else if (dialogTitle === "Edit") {
-      return (confirmButtonFunction as (inputValue: string | undefined, inputHex: string) => void)(
+      setIsTitleValid(true);
+      (confirmButtonFunction as (inputValue: string | undefined, inputHex: string) => void)(
         nameInputRef.current?.value,
         hex
       );
     } else if (dialogTitle === "Search Counter") {
-      return (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
+      const targetCards = (confirmButtonFunction as (cardInfo: CardInfo) => void)(getCardInfo());
+      if (targetCards === null) {
+        e.preventDefault();
+        setIsTitleValid(false);
+        return;
+      }
+
+      setIsTitleValid(true);
     }
   }
 
@@ -89,7 +97,7 @@ export function CardDialogContent({
               ref={nameInputRef}
             />
           </div>
-          {!isTitleValid && <AlertForNoTitle />}
+          {!isTitleValid && <AlertForNoTitle dialogTitle={dialogTitle} />}
           {shouldDisplayColorPicker() && (
             <div className="grid gap-4">
               <Label
