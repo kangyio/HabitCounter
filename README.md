@@ -16,10 +16,7 @@ I liked the app [bettercounter](https://github.com/albertvaka/bettercounter) a l
 
 - git clone this repo
 - run `npm install` to install dependencies
-- run the following commands to build the app for your system. The executable will be in `📂dist` folder
-`npm run dist:win` for Windows
-`npm run dist:mac` for Mac
-`npm run dist:linux` for Linux
+- run `npm run dist:win` for Windows, or `npm run dist:mac` for Mac, or `npm run dist:linux` for Linux, to build the app for your system. The executable will be in `📂dist` folder
 
 ## 📝License
 
